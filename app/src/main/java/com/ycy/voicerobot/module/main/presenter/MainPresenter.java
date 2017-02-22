@@ -190,7 +190,9 @@ public class MainPresenter implements IMainPresenter {
                 String operation = semanticComprehensionResult.getOperation();
                 JSONObject jsonObject = new JSONObject(resultString);
                 JSONObject data = jsonObject.optJSONObject("data");
-                String result = data.optString("result");
+                String result = "";
+                if (data != null)
+                    result = data.optString("result");
 
                 if (APP.equalsIgnoreCase(service) && LAUNCH.equalsIgnoreCase(operation)) {
                     //打开应用
