@@ -44,11 +44,11 @@ public class MusicService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void playMusic(String music_path) {
+    private void playMusic(String musicPath) {
         if (mediaPlayer != null) {
             try {
                 mediaPlayer.reset();
-                mediaPlayer.setDataSource(music_path);
+                mediaPlayer.setDataSource(musicPath);
                 mediaPlayer.prepare();
                 mediaPlayer.start();
             } catch (Exception e) {

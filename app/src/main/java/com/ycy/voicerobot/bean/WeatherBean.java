@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class WeatherBean {
+import java.io.Serializable;
+
+public class WeatherBean implements Serializable {
     private String airQuality;
     private String sourceName;
     private String date;
@@ -102,20 +104,4 @@ public class WeatherBean {
         this.province = province;
     }
 
-    @Override
-    public String toString() {
-        return "WeatherBean{" +
-                "airQuality='" + airQuality + '\'' +
-                ", sourceName='" + sourceName + '\'' +
-                ", date='" + date + '\'' +
-                ", lastUpdateTime='" + lastUpdateTime + '\'' +
-                ", dateLong='" + dateLong + '\'' +
-                ", city='" + city + '\'' +
-                ", wind='" + wind + '\'' +
-                ", windLevel='" + windLevel + '\'' +
-                ", weather='" + weather + '\'' +
-                ", tempRange='" + tempRange + '\'' +
-                ", province='" + province + '\'' +
-                '}';
-    }
 }

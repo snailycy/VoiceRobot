@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class TalkBean {
+import java.io.Serializable;
+
+public class TalkBean implements Serializable {
     private String text;
     private long time;
     private int type;
@@ -36,12 +38,4 @@ public class TalkBean {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "TalkBean{" +
-                "text='" + text + '\'' +
-                ", time=" + time +
-                ", type=" + type +
-                '}';
-    }
 }

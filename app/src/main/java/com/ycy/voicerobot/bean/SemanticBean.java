@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class SemanticBean {
+import java.io.Serializable;
+
+public class SemanticBean implements Serializable {
     private SlotsBean slots;
 
     public SlotsBean getSlots() {

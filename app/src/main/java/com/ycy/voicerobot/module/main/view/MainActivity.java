@@ -160,5 +160,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         recyclerView.smoothScrollToPosition(mTalkBeanList.size() - 1);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+    }
 }

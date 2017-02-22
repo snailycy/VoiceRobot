@@ -30,10 +30,12 @@ import com.ycy.voicerobot.bean.WeatherBean;
 import com.ycy.voicerobot.module.main.adapter.TalkListAdapter;
 import com.ycy.voicerobot.module.main.model.IMainModel;
 import com.ycy.voicerobot.module.main.model.MainModel;
+import com.ycy.voicerobot.module.main.service.MusicService;
 import com.ycy.voicerobot.module.main.view.IMainView;
 import com.ycy.voicerobot.util.DeviceUtils;
 import com.ycy.voicerobot.util.LogUtils;
 import com.ycy.voicerobot.util.SpUtils;
+import com.ycy.voicerobot.util.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,8 +54,6 @@ public class MainPresenter implements IMainPresenter {
     private static final String MUSIC = "music";
     private static final String WEATHER = "weather";
     private static final String QUERY = "QUERY";
-    private static final String CURRENT_DAY = "CURRENT_DAY";
-    private static final String DT_BASIC = "DT_BASIC";
 
     private IMainView mIMainView;
     private IMainModel mIMainModel;
@@ -188,6 +188,9 @@ public class MainPresenter implements IMainPresenter {
                 //success
                 String service = semanticComprehensionResult.getService();
                 String operation = semanticComprehensionResult.getOperation();
+                JSONObject jsonObject = new JSONObject(resultString);
+                JSONObject data = jsonObject.optJSONObject("data");
+                String result = data.optString("result");
 
                 if (APP.equalsIgnoreCase(service) && LAUNCH.equalsIgnoreCase(operation)) {
                     //打开应用
@@ -197,12 +200,12 @@ public class MainPresenter implements IMainPresenter {
                     responseAnswer(semanticComprehensionResult.getAnswer().getText());
                 } else if (MUSIC.equalsIgnoreCase(service) && PLAY.equalsIgnoreCase(operation)) {
                     //播放音乐
-                    playMusic(semanticComprehensionResult.getSemantic());
+                    ArrayList<MusicBean> musicBeenArrayList = new Gson().fromJson(result, new TypeToken<ArrayList<MusicBean>>() {
+                    }.getType());
+                    playMusic(musicBeenArrayList);
                 } else if (WEATHER.equalsIgnoreCase(service) && QUERY.equalsIgnoreCase(operation)) {
                     //查询天气
-                    JSONObject jsonObject = new JSONObject(resultString);
-                    JSONObject data = jsonObject.optJSONObject("data");
-                    ArrayList<WeatherBean> weatherBeanArrayList = new Gson().fromJson(data.optString("result"), new TypeToken<ArrayList<WeatherBean>>() {
+                    ArrayList<WeatherBean> weatherBeanArrayList = new Gson().fromJson(result, new TypeToken<ArrayList<WeatherBean>>() {
                     }.getType());
                     queryWeather(semanticComprehensionResult.getSemantic(), weatherBeanArrayList);
                 } else {
@@ -244,22 +247,22 @@ public class MainPresenter implements IMainPresenter {
                 answerText = "你还没安装" + appName;
             } else {
                 context.startActivity(intent);
-                answerText = "成功打开" + realAppName;
+                answerText = "正在打开" + realAppName;
             }
         } catch (Exception e) {
         }
         responseAnswer(answerText);
     }
 
-    private void playMusic(SemanticBean semanticBean) {
-        SlotsBean slotsBean = semanticBean.getSlots();
-        String artist = slotsBean.getArtist();
-        String song = slotsBean.getSong();
-
-        String defaultAnswer = "没有找到歌曲:" + song;
-        String answerText = defaultAnswer;
-        MusicBean tempMusicBean = null;
-
+    private void playMusic(ArrayList<MusicBean> musicBeenArrayList) {
+        if (musicBeenArrayList == null) {
+            String answerText = ((Activity) mIMainView).getResources().getString(R.string.dont_find_music);
+            responseAnswer(answerText);
+            return;
+        }
+        MusicBean musicBean = musicBeenArrayList.get(0);
+        MusicService.startService((Activity) mIMainView, true, musicBean.getDownloadUrl());
+        String answerText = "正在播放歌曲：" + musicBean.getName() + "，歌手：" + musicBean.getSinger();
         responseAnswer(answerText);
     }
 
@@ -285,14 +288,19 @@ public class MainPresenter implements IMainPresenter {
             if (!TextUtils.isEmpty(dateOrig)) {
                 sb.append(dateOrig);
             }
-            sb.append("的天气：");
+            sb.append("：");
             for (WeatherBean weatherBean : list) {
                 sb.append(weatherBean.getDate() + " , ");
-                sb.append("天气：" + weatherBean.getWeather() + " , ");
-                sb.append("温度：" + weatherBean.getTempRange() + " , ");
-                sb.append("空气质量：" + weatherBean.getAirQuality() + " , ");
-                sb.append("风向：" + weatherBean.getWind() + " , ");
-                sb.append("风级：" + weatherBean.getWindLevel() + "级;/n");
+                if (!StringUtils.isEmpty(weatherBean.getWeather()))
+                    sb.append("天气：" + weatherBean.getWeather() + " , ");
+                if (!StringUtils.isEmpty(weatherBean.getTempRange()))
+                    sb.append("温度：" + weatherBean.getTempRange() + " , ");
+                if (!StringUtils.isEmpty(weatherBean.getAirQuality()))
+                    sb.append("空气质量：" + weatherBean.getAirQuality() + " , ");
+                if (!StringUtils.isEmpty(weatherBean.getWind()))
+                    sb.append("风向：" + weatherBean.getWind() + " , ");
+                if (!StringUtils.isEmpty(weatherBean.getWindLevel()))
+                    sb.append("风级：" + weatherBean.getWindLevel() + "级;\n");
             }
 
             responseAnswer(sb.toString());

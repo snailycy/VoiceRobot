@@ -1,69 +1,43 @@
 package com.ycy.voicerobot.bean;
 
 
-public class MusicBean {
-    private String id;
-    private String data;
-    private String title;
-    private String artist;
-    private String duration;
+import java.io.Serializable;
 
-    public MusicBean(String id, String data, String title, String artist, String duration) {
-        this.id = id;
-        this.data = data;
-        this.title = title;
-        this.artist = artist;
-        this.duration = duration;
+public class MusicBean implements Serializable{
+    private String singer;
+    private String sourceName;
+    private String name;
+    private String downloadUrl;
+
+    public String getSinger() {
+        return singer;
     }
 
-    public String getId() {
-        return id;
+    public void setSinger(String singer) {
+        this.singer = singer;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getSourceName() {
+        return sourceName;
     }
 
-    public String getData() {
-        return data;
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public String getName() {
+        return name;
     }
 
-    public String getTitle() {
-        return title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getDownloadUrl() {
+        return downloadUrl;
     }
 
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    @Override
-    public String toString() {
-        return "MusicBean{" +
-                "id='" + id + '\'' +
-                ", data='" + data + '\'' +
-                ", title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
-                ", duration='" + duration + '\'' +
-                '}';
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
     }
 }

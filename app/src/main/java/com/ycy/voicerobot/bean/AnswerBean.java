@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class AnswerBean {
+import java.io.Serializable;
+
+public class AnswerBean implements Serializable {
     private String text;
     private String type;
 
@@ -19,13 +21,5 @@ public class AnswerBean {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "AnswerBean{" +
-                "text='" + text + '\'' +
-                ", type='" + type + '\'' +
-                '}';
     }
 }

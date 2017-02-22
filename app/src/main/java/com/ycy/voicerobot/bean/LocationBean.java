@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class LocationBean {
+import java.io.Serializable;
+
+public class LocationBean implements Serializable {
     private String city;
     private String cityAddr;
     private String type;

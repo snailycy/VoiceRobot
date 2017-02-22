@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class DateBean {
+import java.io.Serializable;
+
+public class DateBean implements Serializable {
     private String date;
     private String type;
     private String dateOrig;

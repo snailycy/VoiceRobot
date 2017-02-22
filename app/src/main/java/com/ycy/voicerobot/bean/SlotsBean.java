@@ -1,7 +1,9 @@
 package com.ycy.voicerobot.bean;
 
 
-public class SlotsBean {
+import java.io.Serializable;
+
+public class SlotsBean implements Serializable {
     private String name;
     private String code;
     private String artist;

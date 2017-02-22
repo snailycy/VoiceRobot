@@ -16,6 +16,7 @@
     <string name="system_setting">系统设置</string>
     <string name="click_talk">点击说话</string>
     <string name="default_voice_answer">你说啥，没听清楚？</string>
+    <string name="dont_find_music">对不起，没有找到这首歌</string>
 
     <string-array name="voice_type">
         <item>普通话</item>

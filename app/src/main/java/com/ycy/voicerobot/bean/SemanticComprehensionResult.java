@@ -1,10 +1,9 @@
 package com.ycy.voicerobot.bean;
 
-/**
- * Created by dh on 2017/2/21.
- */
+import java.io.Serializable;
 
-public class SemanticComprehensionResult {
+
+public class SemanticComprehensionResult implements Serializable {
     private int rc;
     private String operation;
     private String service;
