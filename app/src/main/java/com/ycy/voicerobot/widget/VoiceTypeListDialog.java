@@ -8,7 +8,9 @@ import com.ycy.voicerobot.R;
 import com.ycy.voicerobot.manager.SpManager;
 import com.ycy.voicerobot.util.LogUtils;
 
-
+/**
+ * 设置播报语音的语言类型对话框
+ */
 public class VoiceTypeListDialog extends Dialog {
     private Context context;
     private int[] rbIds = {R.id.rb_1, R.id.rb_2, R.id.rb_3, R.id.rb_4,

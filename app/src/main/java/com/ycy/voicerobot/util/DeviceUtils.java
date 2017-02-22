@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dh on 2017/2/21.
+ * 手机设备、app信息相关的工具类
  */
 
 public class DeviceUtils {

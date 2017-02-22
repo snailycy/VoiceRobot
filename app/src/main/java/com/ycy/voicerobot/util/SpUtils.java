@@ -4,6 +4,9 @@ import com.ycy.voicerobot.R;
 import com.ycy.voicerobot.app.VRApplication;
 import com.ycy.voicerobot.manager.SpManager;
 
+/**
+ * SharedPreferences工具类
+ */
 public class SpUtils {
     public static void writeVersion(String version) {
         SpManager.getInstance().writeVersion(version);

@@ -19,7 +19,7 @@ import com.ycy.voicerobot.util.LogUtils;
 import com.ycy.voicerobot.util.SpUtils;
 
 /**
- * 讯飞智能语音
+ * 讯飞智能语音相关API的封装
  */
 public class XunfeiManager {
     private static XunfeiManager mXunfeiManager;

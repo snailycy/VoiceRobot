@@ -6,7 +6,9 @@ import android.widget.SeekBar;
 
 import com.ycy.voicerobot.R;
 
-
+/**
+ * 设置播报声音语速的对话框
+ */
 public class VoiceSpeedDialog extends Dialog {
     private Context context;
     private OnProgressChangedListener mOnProgressChangedListener;

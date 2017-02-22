@@ -7,6 +7,9 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+/**
+ * 播放音乐的service
+ */
 public class MusicService extends Service {
     private static final String INTENT_KEY_IS_PLAY = "intent_key_is_play";
     private static final String INTENT_KEY_MUSIC_PATH = "intent_key_music_path";
