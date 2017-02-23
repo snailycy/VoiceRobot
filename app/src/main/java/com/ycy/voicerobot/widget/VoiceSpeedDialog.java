@@ -3,6 +3,7 @@ package com.ycy.voicerobot.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.ycy.voicerobot.R;
 
@@ -13,6 +14,7 @@ public class VoiceSpeedDialog extends Dialog {
     private Context context;
     private OnProgressChangedListener mOnProgressChangedListener;
     private SeekBar sbVoiceSpeed;
+    private TextView tvSpeedTitle;
 
     public VoiceSpeedDialog(Context context) {
         super(context);
@@ -29,14 +31,16 @@ public class VoiceSpeedDialog extends Dialog {
         init(context);
     }
 
-    private void init(Context context) {
+    private void init(final Context context) {
         this.context = context;
         this.setContentView(R.layout.voice_speed_popwindow);
 
+        tvSpeedTitle = (TextView) findViewById(R.id.tv_speed_title);
         sbVoiceSpeed = (SeekBar) findViewById(R.id.sb_voice_speed);
         sbVoiceSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvSpeedTitle.setText(context.getResources().getString(R.string.voice_speed) + "：" + progress + "%");
                 if (mOnProgressChangedListener != null) {
                     mOnProgressChangedListener.onProgressChanged(progress);
                 }
