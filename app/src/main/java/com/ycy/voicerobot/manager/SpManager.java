@@ -31,30 +31,30 @@ public class SpManager {
         return mSpManager;
     }
 
-    public static void writeVersion(String version) {
+    public void writeVersion(String version) {
         editor.putString(SpKeyConstant.VERSION, version);
         editor.commit();
     }
 
-    public static String readVersion() {
+    public String readVersion() {
         return sp.getString(SpKeyConstant.VERSION, "");
     }
 
-    public static void writeVoiceTypePosition(int position) {
+    public void writeVoiceTypePosition(int position) {
         editor.putInt(SpKeyConstant.VOICE_TYPE, position);
         editor.commit();
     }
 
-    public static int readVoiceTypePosition() {
+    public int readVoiceTypePosition() {
         return sp.getInt(SpKeyConstant.VOICE_TYPE, 0);
     }
 
-    public static void writeVoiceSpeed(int progress) {
+    public void writeVoiceSpeed(int progress) {
         editor.putInt(SpKeyConstant.VOICE_SPEED, progress);
         editor.commit();
     }
 
-    public static int readVoiceSpeed() {
+    public int readVoiceSpeed() {
         return sp.getInt(SpKeyConstant.VOICE_SPEED, -1);
     }
 
